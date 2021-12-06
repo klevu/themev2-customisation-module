@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!--
+            Add our custom code to the klevu.interactive call
+        -->
+        <referenceBlock name="klevu_frontendjs.js_init.additional.before">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="acme_mymodulecategorynavigation.klevu.js_init.additional.before"
+                   template="Acme_MyModuleCategorynavigation::html/head/js_init/additional_before/categorynavigation.phtml"/>
+        </referenceBlock>
+
+        <!--
+            Add our new category page template between klevu.interactive and the core theme files
+        -->
+        <referenceBlock name="head.additional">
+            <block class="Klevu\FrontendJs\Block\Template"
+                   after="klevu_frontendjs.js_init"
+                   before="klevu_frontendjs.js_includes"
+                   name="acme_mymodulecategorynavigation.klevu.category_page_template"
+                   template="Acme_MyModuleCategorynavigation::klevu/category_page.phtml">
+                <arguments>
+                    <!--
+                        We will use the existing condition from the Klevu_Categorynavigation module to ensure
+                        that our changes to the frontend search options only take place when the
+                        relevant configuration is enabled
+                    -->
+                    <argument name="is_enabled_conditions_fqcn" xsi:type="array">
+                        <item name="klevu_catnav_themev2" xsi:type="string">Klevu\Categorynavigation\Service\ThemeV2\IsEnabledCondition</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

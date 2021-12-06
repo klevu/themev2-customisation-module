@@ -1,0 +1,15 @@
+<?php /** @var Klevu\FrontendJs\Block\Template $block */ ?>
+<!-- Define our own, custom version of the klevuLandingTemplateResultsHeadingTitle template -->
+<script type="template/klevu" id="klevuLandingTemplateResultsHeadingTitleCustom">
+    <%
+    var searchedTerm = data.settings.term;
+    var totalNumberOfResults = klevu.getObjectPath(data, "query." + dataLocal + ".meta.totalResultsFound");
+    if (data.settings.isCATNAV) {
+    searchedTerm = data.settings.categoryPath;
+    }
+    %>
+    <div class="kuResultsHeadingTitleContainer">
+        !CUSTOMISED! <strong class="kuResultsNumber"> <%= (totalNumberOfResults) ? totalNumberOfResults : 0 %> </strong>
+        <%= (parseInt(totalNumberOfResults) > 1) ? " Results" : " Result" %> found <%= (searchedTerm && searchedTerm.length && searchedTerm != "*") ? "for '"+searchedTerm+"'" : "" %>
+    </div>
+</script>

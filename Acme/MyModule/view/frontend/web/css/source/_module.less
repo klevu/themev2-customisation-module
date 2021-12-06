@@ -1,0 +1,27 @@
+/**
+    Add your overrides to Klevu styling below
+ */
+& when (@media-common = true) {
+    .kuQuickSearchResultsContainer {
+        [data-container-id="ku_quick_main_container"] {
+            /**
+                Set alternative font styling for items in the
+                search suggestions element
+             */
+            .klevuHeadingText {
+                color: #2b556e;
+                font-weight: 600;
+                text-transform: none;
+            }
+
+            /**
+                Change the border colour for separators in the
+                search suggestions element
+             */
+            .klevuAutoSuggestionsWrap,
+            .klevuResultsBlock .klevuQuickSearchResults ul li {
+                border-bottom-color: #97c73e;
+            }
+        }
+    }
+}

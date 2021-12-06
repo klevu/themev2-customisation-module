@@ -1,0 +1,33 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
+// Define a new custom event, which will fire after Category has initialised
+klevu.coreEvent.build({
+    name: "setRemoteConfigCategoryOverride",
+    fire: function () {
+        if (klevu.getSetting(klevu,"settings.flags.setRemoteConfigCatnav.build", false)) {
+            return true;
+        }
+        return false;
+    },
+    maxCount: 150,
+    delay: 100
+});
+
+// Listen in to our custom event, to make our overrides
+klevu.coreEvent.attach("setRemoteConfigCategoryOverride", {
+    name: "attachRemoteConfigCategoryOverride",
+    fire: function () {
+        // Override the klevuLandingTemplateResultsHeadingTitle template with our own
+        klevu.search.catnav.getScope().template.setTemplate(
+            klevu.dom.helpers.getHTML("#klevuLandingTemplateResultsHeadingTitleCustom"),
+            "klevuLandingTemplateResultsHeadingTitle",
+            true
+        );
+
+        // We're done with our overrides, tell Klevu to power up!
+        klevu({
+            powerUp: {
+                catnav: true
+            }
+        });
+    }
+});
